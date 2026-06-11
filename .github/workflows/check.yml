@@ -19,16 +19,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # zadanie startuje co 5 minut, a w srodku sprawdza co ~minute,
+      # zadanie startuje co 5 minut, a w srodku sprawdza co ~3 minuty,
       # bo harmonogram GitHuba nie schodzi ponizej 5 minut
-      - name: Sprawdzaj termin co minute przez ~4,5 min
+      - name: Sprawdzaj termin co ~3 minuty
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: |
           end=$((SECONDS + 280))
           while [ $SECONDS -lt $end ]; do
             python3 check_termin.py
-            sleep 60
+            sleep 180
           done
 
       - name: Zapisz stan do repozytorium

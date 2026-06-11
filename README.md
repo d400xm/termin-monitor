@@ -1,6 +1,6 @@
 # Monitor terminów ZnanyLekarz
 
-Sprawdza (efektywnie co ~1 minutę) najbliższy wolny termin u **Martyny
+Sprawdza (co ~3 minuty) najbliższy wolny termin u **Martyny
 Sacharewicz (fizjoterapeuta, Białystok)** i wysyła powiadomienie push na telefon, gdy
 pojawi się termin **wcześniejszy** niż dotychczas znany. Działa w chmurze
 (GitHub Actions) — Twój komputer może być wyłączony. Całość jest darmowa.
@@ -8,8 +8,8 @@ pojawi się termin **wcześniejszy** niż dotychczas znany. Działa w chmurze
 ## Jak to działa
 
 1. GitHub Actions uruchamia zadanie co 5 minut (częściej harmonogram GitHuba
-   nie pozwala), a każde zadanie przez ~4,5 minuty sprawdza stronę co minutę —
-   efektywnie wychodzi ~1 sprawdzenie na minutę.
+   nie pozwala), a każde zadanie sprawdza stronę co ~3 minuty —
+   efektywnie wychodzi sprawdzenie co ~2,5–3 minuty.
 2. Skrypt pobiera stronę lekarza i wyciąga z niej pole `earliestBookableDate`
    (najwcześniejszy rezerwowalny termin, osobno dla każdej usługi — brany jest
    najwcześniejszy ze wszystkich).
