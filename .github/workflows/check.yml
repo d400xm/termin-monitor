@@ -15,14 +15,21 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
 
-      - name: Sprawdz najblizszy termin
+      # zadanie startuje co 5 minut, a w srodku sprawdza co ~minute,
+      # bo harmonogram GitHuba nie schodzi ponizej 5 minut
+      - name: Sprawdzaj termin co minute przez ~4,5 min
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-        run: python3 check_termin.py
+        run: |
+          end=$((SECONDS + 280))
+          while [ $SECONDS -lt $end ]; do
+            python3 check_termin.py
+            sleep 60
+          done
 
       - name: Zapisz stan do repozytorium
         run: |
